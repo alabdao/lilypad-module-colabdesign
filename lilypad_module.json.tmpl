@@ -1,0 +1,61 @@
+{
+  "machine": {
+    "gpu": 0,
+    "cpu": 1000,
+    "ram": 100
+  },
+  "job": {
+    "APIVersion": "V1beta1",
+    "Spec": {
+      "Engine": "Docker",
+      "Verifier": "Noop",
+      "Publisher": "Estuary",
+      "PublisherSpec": {
+        "Type": "Estuary"
+      },
+      "Docker": {
+        "Image": "docker.io/niklastr/dev@sha256:01dd6d1eb418d67e97e7517de220e76f9403517502efa411f68c2eeb88977d0f",
+        "Entrypoint": [
+          "/bin/bash",
+          "-c",
+          "/bin/bash -c \"wget https://raw.githubusercontent.com/labdao/plex/main/tools/colabdesign/install.py; wget https://raw.githubusercontent.com/labdao/plex/main/tools/colabdesign/main.py; mv /inputs/*.pdb /inputs/target_protein.pdb && mv /inputs/*.yaml /inputs/config.yaml; python install.py; echo 'Install complete!'; echo 'Attempting main.py...'; python main.py; echo 'main.py complete!';\""
+        ]
+      },
+      "Language": {
+        "JobContext": {}
+      },
+      "Wasm": {
+        "EntryModule": {}
+      },
+      "Resources": {
+        "Memory": "12gb",
+        "GPU": "1"
+      },
+      "Network": {
+        "Type": "Full"
+      },
+      "Timeout": 3600,
+      "inputs": [
+        {
+          "StorageSource": "IPFS",
+          "CID": "QmSdDAMgCKN5nKrR8zPc7oeTqQPD17SqJXL59VwGoLXmYF",
+          "path": "/inputs"
+        }
+      ],
+      "outputs": [
+        {
+          "StorageSource": "IPFS",
+          "Name": "outputs",
+          "path": "/outputs"
+        }
+      ],
+      "Annotations": [
+        "test",
+        "benchmarking"
+      ],
+      "Deal": {
+        "Concurrency": 1
+      }
+    }
+  }
+}
