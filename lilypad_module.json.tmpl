@@ -18,11 +18,11 @@
         "Type": "Estuary"
       },
       "Docker": {
-        "Image": "docker.io/niklastr/dev@sha256:01dd6d1eb418d67e97e7517de220e76f9403517502efa411f68c2eeb88977d0f",
+        "Image": "quay.io/labdao/colabdesign:sha-adfe6d8@sha256:c01d09d5bb8989c3b5bce4777a34dc057fac164a771a482a35f20ce8531cf0af",
         "Entrypoint": [
           "/bin/bash",
           "-c",
-          "/bin/bash -c \"wget https://raw.githubusercontent.com/labdao/plex/main/tools/colabdesign/install.py; wget https://raw.githubusercontent.com/labdao/plex/main/tools/colabdesign/main.py; mv /inputs/*.pdb /inputs/target_protein.pdb && mv /inputs/*.yaml /inputs/config.yaml; python install.py; echo 'Install complete!'; echo 'Attempting main.py...'; python main.py; echo 'main.py complete!';\""
+          "/bin/bash -c \"mv /inputs/*.pdb /inputs/target_protein.pdb && mv /inputs/*.yaml /inputs/config.yaml; ls /inputs; echo 'Attempting main.py...'; python -u main.py; echo 'main.py complete!';\""
         ]
       },
       "Language": {
