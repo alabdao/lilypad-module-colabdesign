@@ -1,61 +1,49 @@
 {
   "machine": {
-    "gpu": 1,
     "cpu": 1000,
-    "ram": 100
+    "gpu": 1,
+    "ram": 1024
   },
   "job": {
-    "APIVersion": "V1beta1",
-    "Metadata": {
-      "CreatedAt": "0001-01-01T00:00:00Z",
-      "Requester": {}
-    },
+    "APIVersion": "V1beta2",
     "Spec": {
-      "Engine": "Docker",
-      "Verifier": "Noop",
-      "Publisher": "Estuary",
+      "EngineSpec": {
+        "Type": "docker",
+        "Params": {
+          "EnvironmentVariables": [
+            "PLEX_JOB_INPUTS={\"binder_length\":80,\"contigs_override\":\"A1-7/3/A11-80:B\",\"hotspot\":\"B131\",\"number_of_binders\":1,\"target_chain\":\"B\",\"target_end_residue\":168,\"target_protein\":\"/inputs/target_protein/pdc_upar_1_target.pdb\",\"target_start_residue\":1}"
+          ],
+          "Image": "docker.io/openzyme/colabdesign-gateway@sha256:0b452233b0fa39e7a220c3f1be9f31010d175595207b91c62349d690aff38626"
+        }
+      },
       "PublisherSpec": {
-        "Type": "Estuary"
+        "Type": "ipfs"
       },
-      "Docker": {
-        "Image": "quay.io/labdao/colabdesign:sha-adfe6d8@sha256:c01d09d5bb8989c3b5bce4777a34dc057fac164a771a482a35f20ce8531cf0af",
-        "Entrypoint": [
-          "/bin/bash",
-          "-c",
-          "/bin/bash -c \"mv /inputs/*.pdb /inputs/target_protein.pdb && mv /inputs/*.yaml /inputs/config.yaml; ls /inputs; echo 'Attempting main.py...'; python -u main.py; echo 'main.py complete!';\""
-        ]
-      },
-      "Language": {
-        "JobContext": {}
-      },
+      "Docker": {},
       "Wasm": {
         "EntryModule": {}
       },
       "Resources": {
+        "CPU": "3.000000",
         "Memory": "12gb",
         "GPU": "1"
       },
       "Network": {
         "Type": "Full"
       },
-      "Timeout": 3600,
-      "inputs": [
+      "Timeout": 259200,
+      "Inputs": [
         {
-          "StorageSource": "IPFS",
-          "CID": "QmSdDAMgCKN5nKrR8zPc7oeTqQPD17SqJXL59VwGoLXmYF",
-          "path": "/inputs"
+          "StorageSource": "ipfs",
+          "CID": "QmcJdrAgF85vFWUXzpQwpx2njEiWn4smXnfJHufc1aF1uh",
+          "Path": "/inputs/target_protein/pdc_upar_1_target.pdb"
         }
       ],
-      "outputs": [
+      "Outputs": [
         {
-          "StorageSource": "IPFS",
           "Name": "outputs",
-          "path": "/outputs"
+          "Path": "/outputs"
         }
-      ],
-      "Annotations": [
-        "test",
-        "benchmarking"
       ],
       "Deal": {
         "Concurrency": 1
